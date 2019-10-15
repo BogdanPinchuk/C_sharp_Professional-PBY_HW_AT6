@@ -61,6 +61,8 @@ namespace LesApp0
                 // якщо завантажено файл з правильним розширенням
                 toolLb.Text = $"File loaded: {Path.GetFileName(path)}";
                 analysis.Enabled = true;
+                tree.Nodes.Clear();
+                tbInfo.Text = string.Empty;
             }
             else
             {
@@ -320,6 +322,7 @@ namespace LesApp0
 
                 Console.WriteLine("Створення екземплярів всіх класів і запуск всіх ментодів без змін.");
 
+                #region Пошук класів
                 // список типів класів
                 List<Type> types = new List<Type>();
 
@@ -344,27 +347,47 @@ namespace LesApp0
                 foreach (Type i in types)
                 {
                     classes.Add(Activator.CreateInstance(i));
-                }
+                } 
+                #endregion
 
                 // перебір і запуск всіх методів
                 Console.WriteLine("Запуск на виконання всіх методів без внесення змін.");
+                StartMethods(classes);
+
+                // зміна значення поля якщо є
                 foreach (object i in classes)
                 {
-                    MethodInfo[] methods = i.GetType()
-                        .GetMethods(BindingFlags.Instance |
-                        BindingFlags.Static|
-                        BindingFlags.NonPublic| 
-                        BindingFlags.Public|
-                        BindingFlags.DeclaredOnly);
-
-                    foreach (MethodInfo j in methods)
-                    {
-                        j.Invoke(i, null);
-                    }
+                    classes.GetType().GetField("field").SetValue(i, 250);
                 }
 
+                Console.WriteLine("Запуск на виконання всіх методів із внесеними змінами.");
+                StartMethods(classes);
+
+                Console.WriteLine("\nНатисніть будь яку клавішу для закриття.");
                 Console.ReadKey(true);
                 FreeConsole();
+            }
+        }
+
+        /// <summary>
+        /// Запуск всіх методів класу
+        /// </summary>
+        /// <param name="classes"></param>
+        private void StartMethods(List<object> classes)
+        {
+            foreach (object i in classes)
+            {
+                MethodInfo[] methods = i.GetType()
+                    .GetMethods(BindingFlags.Instance |
+                    BindingFlags.Static |
+                    BindingFlags.NonPublic |
+                    BindingFlags.Public |
+                    BindingFlags.DeclaredOnly);
+
+                foreach (MethodInfo j in methods)
+                {
+                    j.Invoke(i, null);
+                }
             }
         }
 
