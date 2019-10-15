@@ -101,7 +101,7 @@ namespace LesApp0
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void analysis_Click(object sender, EventArgs e)
+        private void Analysis_Click(object sender, EventArgs e)
         {
             if (path == null || path == string.Empty)
                 return;
@@ -132,7 +132,7 @@ namespace LesApp0
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void tree_Click(object sender, EventArgs e)
+        private void Tree_Click(object sender, EventArgs e)
         {
             // зміна курсора
             this.Cursor = Cursors.AppStarting;
@@ -272,7 +272,7 @@ namespace LesApp0
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CloseToolStripMenuItem_Click(object sender, EventArgs e)
             => this.Close();
 
         /// <summary>
@@ -302,18 +302,18 @@ namespace LesApp0
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void hw_Click(object sender, EventArgs e)
+        private void Hw_Click(object sender, EventArgs e)
         {
             // http://www.cyberforum.ru/windows-forms/thread220529.html
 
             // запуск по слабклій ссилці в іншому потоці
-            new Thread(NewConsole).Start();
+            new Thread(AddConsole).Start();
         }
 
         /// <summary>
         /// Запуск консолі з під графічного інтерфейсу
         /// </summary>
-        private void NewConsole()
+        private void AddConsole()
         {
             if (AllocConsole())
             {
@@ -329,10 +329,7 @@ namespace LesApp0
                 // фільтр по класам
                 foreach (Type i in assembly.GetTypes())
                 {
-                    if (i.IsClass)
-                    {
-                        types.Add(i);
-                    }
+                    if (i.IsClass) types.Add(i);
                 }
 
                 // виведення інформації
@@ -351,16 +348,18 @@ namespace LesApp0
                 #endregion
 
                 // перебір і запуск всіх методів
-                Console.WriteLine("Запуск на виконання всіх методів без внесення змін.");
+                Console.WriteLine("\nЗапуск на виконання всіх методів без внесення змін.");
                 StartMethods(classes);
 
                 // зміна значення поля якщо є
                 foreach (object i in classes)
                 {
-                    classes.GetType().GetField("field").SetValue(i, 250);
+                    //classes.GetType().GetField("field").SetValue(i, 250);
+                    i.GetType().GetField("field", BindingFlags.Instance | BindingFlags.Public |
+                        BindingFlags.NonPublic | BindingFlags.DeclaredOnly).SetValue(i, 250);
                 }
 
-                Console.WriteLine("Запуск на виконання всіх методів із внесеними змінами.");
+                Console.WriteLine("\nЗапуск на виконання всіх методів із внесеними змінами.");
                 StartMethods(classes);
 
                 Console.WriteLine("\nНатисніть будь яку клавішу для закриття.");
@@ -395,7 +394,7 @@ namespace LesApp0
         /// Запуск консолі
         /// </summary>
         /// <returns></returns>
-        [DllImport("kernel32.dll", SetLastError = true)]
+        [DllImport("Kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool AllocConsole();
 
@@ -403,7 +402,7 @@ namespace LesApp0
         /// Закриття консолі
         /// </summary>
         /// <returns></returns>
-        [DllImport("kernel32.dll", SetLastError = true)]
+        [DllImport("Kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool FreeConsole();
 

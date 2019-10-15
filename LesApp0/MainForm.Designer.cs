@@ -108,7 +108,7 @@ namespace LesApp0
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
             this.closeToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.closeToolStripMenuItem.Text = "Close";
-            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
+            this.closeToolStripMenuItem.Click += new System.EventHandler(this.CloseToolStripMenuItem_Click);
             // 
             // analysis
             // 
@@ -116,7 +116,7 @@ namespace LesApp0
             this.analysis.Name = "analysis";
             this.analysis.Size = new System.Drawing.Size(62, 20);
             this.analysis.Text = "Analysis";
-            this.analysis.Click += new System.EventHandler(this.analysis_Click);
+            this.analysis.Click += new System.EventHandler(this.Analysis_Click);
             // 
             // hw
             // 
@@ -124,7 +124,7 @@ namespace LesApp0
             this.hw.Size = new System.Drawing.Size(91, 20);
             this.hw.Text = "ReflectionCW";
             this.hw.Visible = false;
-            this.hw.Click += new System.EventHandler(this.hw_Click);
+            this.hw.Click += new System.EventHandler(this.Hw_Click);
             // 
             // tree
             // 
@@ -133,7 +133,7 @@ namespace LesApp0
             this.tree.Name = "tree";
             this.tree.Size = new System.Drawing.Size(105, 216);
             this.tree.TabIndex = 2;
-            this.tree.Click += new System.EventHandler(this.tree_Click);
+            this.tree.Click += new System.EventHandler(this.Tree_Click);
             // 
             // tbInfo
             // 
