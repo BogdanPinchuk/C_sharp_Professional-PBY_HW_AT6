@@ -39,6 +39,7 @@ namespace LesApp0
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.analysis = new System.Windows.Forms.ToolStripMenuItem();
+            this.hw = new System.Windows.Forms.ToolStripMenuItem();
             this.tree = new System.Windows.Forms.TreeView();
             this.tbInfo = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -72,7 +73,8 @@ namespace LesApp0
             // 
             this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.analysis});
+            this.analysis,
+            this.hw});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
             this.menu.Size = new System.Drawing.Size(361, 24);
@@ -106,6 +108,7 @@ namespace LesApp0
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
             this.closeToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.closeToolStripMenuItem.Text = "Close";
+            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // analysis
             // 
@@ -115,6 +118,14 @@ namespace LesApp0
             this.analysis.Text = "Analysis";
             this.analysis.Click += new System.EventHandler(this.analysis_Click);
             // 
+            // hw
+            // 
+            this.hw.Name = "hw";
+            this.hw.Size = new System.Drawing.Size(91, 20);
+            this.hw.Text = "ReflectionCW";
+            this.hw.Visible = false;
+            this.hw.Click += new System.EventHandler(this.hw_Click);
+            // 
             // tree
             // 
             this.tree.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -122,7 +133,6 @@ namespace LesApp0
             this.tree.Name = "tree";
             this.tree.Size = new System.Drawing.Size(105, 216);
             this.tree.TabIndex = 2;
-            this.help.SetToolTip(this.tree, "Типи наявні у збірці");
             this.tree.Click += new System.EventHandler(this.tree_Click);
             // 
             // tbInfo
@@ -131,9 +141,9 @@ namespace LesApp0
             this.tbInfo.Location = new System.Drawing.Point(0, 0);
             this.tbInfo.Multiline = true;
             this.tbInfo.Name = "tbInfo";
+            this.tbInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.tbInfo.Size = new System.Drawing.Size(252, 216);
             this.tbInfo.TabIndex = 3;
-            this.help.SetToolTip(this.tbInfo, "Детальна інформація про тип");
             // 
             // splitContainer1
             // 
@@ -197,6 +207,7 @@ namespace LesApp0
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.OpenFileDialog openFD;
         private ToolTip help;
+        private ToolStripMenuItem hw;
     }
 }
 
